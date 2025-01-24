@@ -10,8 +10,8 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 const ProductCard = ({
   product,
-  hideBorder,
-  hideDetails,
+  hideBorder = false,
+  hideDetails = false,
 }: {
   product: IProduct;
   hideBorder: boolean;
@@ -61,6 +61,7 @@ const ProductCard = ({
         <Ratings rating={product.avgRating} />
         <span> ({formatNumber(product.numReviews)}) </span>
       </div>
+
       <ProductPrice
         isDeal={product.tags.includes('todays-deal')}
         price={product.price}
@@ -73,7 +74,7 @@ const ProductCard = ({
   return hideBorder ? (
     <div className='flex flex-col'>
       <ProductImage />
-      {hideDetails && (
+      {!hideDetails && (
         <>
           <div className='p-3 flex-1 text-center'>
             <ProductDetail />
@@ -86,6 +87,7 @@ const ProductCard = ({
       <CardHeader className='p-3'>
         <ProductImage />
       </CardHeader>
+
       {!hideDetails && (
         <>
           <CardContent className='p-3 flex-1 text-center'>
